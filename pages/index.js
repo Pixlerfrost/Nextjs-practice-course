@@ -12,8 +12,13 @@ function index() {
      signIn()
     }}>Sign In</a>
    </Link>
-
- 
+   
+  <Link href='/api/auth/signout'>
+   <a onClick={e => {
+    e.preventDefault()
+    signOut()
+   }}>Sign Out</a>
+   </Link>
   </>
  )
 }
