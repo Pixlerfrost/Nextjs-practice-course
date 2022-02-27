@@ -1,18 +1,35 @@
-import {signIn, signOut} from "next-auth/react"
+import {signIn, signOut, useSession} from "next-auth/react"
 import Link from "next/link"
 
 function index() {
+ const {session, loading} = useSession()
+ 
  return (
   <>
    <h1>Home Page</h1>
 
-   <Link href='/api/auth/signin'>
+   {
+    !session && !loading && (
+     <Link href='/api/auth/signin'>
     <a onClick={e => {
      e.preventDefault()
-     signIn()
+     signIn('github')
     }}>Sign In</a>
    </Link>
-   
+    )
+   }
+
+    {
+     session && (
+   <Link href='/api/auth/signout'>
+     <a onClick={e => {
+      e.preventDefault()
+      signOut()
+   }}>Sign Out</a>
+   </Link>
+     )
+    }
+
   <Link href='/api/auth/signout'>
    <a onClick={e => {
     e.preventDefault()
