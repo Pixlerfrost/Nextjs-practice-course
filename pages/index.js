@@ -1,59 +1,31 @@
-import Link from 'next/link'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { useSession, signIn, signOut } from 'next-auth/react';
 
+// using client side session retrieval
 function index() {
-  const {session} = useSession()
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return <h1>Loading...</h1>;
+  }
+  if (session) {
+    return (
+      <>
+        Signed in as {session.user?.email} <br />
+        <button type="button" onClick={() => signOut()}>
+          Sign out
+        </button>
+      </>
+    );
+  }
   return (
-    <nav className='header'>
-      <h1 className='logo'>
-        <a href='#'>NextAuth</a>
-      </h1>
-        <li>
-          <Link href='/'>
-            <a>Home</a>
-          </Link>
-        </li>
-        <li>
-          <Link href='/dashboard'>
-            <a>Dashboard</a>
-          </Link>
-        </li>
-        <li>
-          <Link href='/blog'>
-            <a>Blog</a>
-          </Link>
-        </li>
+    <>
+      Not signed in <br />
+      <button type="button" onClick={() => signIn()}>
+        Sign in
+      </button>
+    </>
+  );
+};
 
-         {!session} {
-
-          <li>
-            <Link href='/api/auth/signin'>
-              <a
-                onClick={e => {
-                  e.preventDefault()
-                  signIn('github')
-                }}>
-                Sign In
-              </a>
-            </Link>
-          </li>
-        }
-        
-        {session && (
-          <li>
-            <Link href='/api/auth/signout'>
-              <a
-                onClick={e => {
-                  e.preventDefault()
-                  signOut()
-                }}>
-                Sign Out
-              </a>
-            </Link>
-          </li>
-        )}
-    </nav>
-  )
-}
 
 export default index
