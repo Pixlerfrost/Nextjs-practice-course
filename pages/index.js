@@ -4,10 +4,8 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 // using client side session retrieval
 function index() {
   const { data: session, status } = useSession();
-
-  <Link href="http://localhost:3000/dashboard">
-  <a>Dashboard</a>
-  </Link>
+  
+ 
 
   if (status === 'loading') {
     return <h1>Loading...</h1>;
@@ -31,6 +29,12 @@ function index() {
     </>
   );
 };
+
+return (
+  <Link href="http://localhost:3000/dashboard">
+  <a>dashboard</a>
+  </Link>
+)
 
 
 export default index
