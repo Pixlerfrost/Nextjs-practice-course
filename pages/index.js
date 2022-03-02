@@ -4,6 +4,7 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 // using client side session retrieval
 function index() {
   const { data: session, status } = useSession();
+  console.log(session, status)
   
  
 
@@ -13,6 +14,9 @@ function index() {
   if (session) {
     return (
       <>
+      <Link href="http://localhost:3000/dashboard">
+        <a>dashboard</a>
+      </Link> <br/>
         Signed in as {session.user?.email} <br/>
         <button type="button" onClick={() => signOut()}>
           Sign out
@@ -30,11 +34,6 @@ function index() {
   );
 };
 
-return (
-  <Link href="http://localhost:3000/dashboard">
-  <a>dashboard</a>
-  </Link>
-)
 
 
 export default index
