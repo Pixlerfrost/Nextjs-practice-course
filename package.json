@@ -9,6 +9,10 @@
     "server": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.8.6",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^6",
     "json-server": "^0.16.3",
     "next": "^12.1.0",
     "next-auth": "^4.2.1",
