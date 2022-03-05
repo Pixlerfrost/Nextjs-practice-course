@@ -17,6 +17,7 @@ function index() {
       <Link href="http://localhost:3000/dashboard">
         <a>dashboard</a>
       </Link> <br/>
+
         Signed in as {session.user?.email} <br/>
         <button type="button" onClick={() => signOut()}>
           Sign out
